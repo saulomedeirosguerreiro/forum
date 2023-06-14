@@ -1,14 +1,14 @@
-import Home from '@/components/Home';
-import ThreadShow from '@/components/ThreadShow';
-import NotFound from '@/components/NotFound';
+import HomePage from '@/pages/HomePage';
+import ThreadShow from '@/pages/ThreadShow';
+import NotFound from '@/pages/NotFound';
 import { createRouter, createWebHistory} from 'vue-router';
 import sourceData  from '@/data.json';
 
 const routes = [
     {
         path: '/',
-        name: 'Home',
-        component: Home,
+        name: 'HomePage',
+        component: HomePage,
     },
     {
         path: '/thread/:id',
