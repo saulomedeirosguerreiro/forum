@@ -1,22 +1,22 @@
 <template>
   <div class="container">
     <h1>Welcome Threads</h1>
-    <ThreadList :threads="threads" />
+    <CategoryList :categories="categories"/>
   </div>
 </template>
 
 <script setup>
 import sourceData from '@/data.json'
 import { defineComponent, reactive } from 'vue';
-import ThreadList from '@/components/ThreadList.vue';
+import CategoryList from '@/components/CategoryList'
 
 defineComponent({
   components: {
-    ThreadList,
+    CategoryList,
   }
 })
 
-const threads = reactive(sourceData.threads);
+const categories = reactive(sourceData.categories);
 </script>
 
 <style>
