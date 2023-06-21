@@ -9,13 +9,15 @@
   </template>
   
   <script setup>
-  import sourceData from '@/data.json'
+  import { useStore } from 'vuex'; 
   import { reactive, computed, defineProps, defineComponent } from 'vue';
   import PostList from '@/components/PostList.vue';
   import PostEditor from '@/components/PostEditor.vue';
   
-  const posts = reactive(sourceData.posts);
-  const threads = reactive(sourceData.threads);
+  const store = useStore();
+
+  const posts = reactive(store.state.posts);
+  const threads = reactive(store.state.threads);
 
 
   defineComponent({

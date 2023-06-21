@@ -15,9 +15,9 @@
   </template>
   
   <script setup>
+  import { useStore } from 'vuex';
   import { defineComponent, defineProps, computed} from 'vue'
   import ThreadList from '@/components/ThreadList'
-  import sourceData from '@/data.json'
 
   defineComponent({
     components: {
@@ -32,8 +32,10 @@
       }
   });
 
-  const forum = computed(() => sourceData.forums.find(forum => forum.id === props.id))
-  const threads = computed(() => sourceData.threads.filter(thread => thread.forumId === props.id))
+  const store = useStore();
+
+  const forum = computed(() => store.state.forums.find(forum => forum.id === props.id))
+  const threads = computed(() => store.state.threads.filter(thread => thread.forumId === props.id))
 
   </script>
   

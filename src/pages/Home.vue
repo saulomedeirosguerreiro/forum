@@ -6,8 +6,8 @@
 </template>
 
 <script setup>
-import sourceData from '@/data.json'
-import { defineComponent, reactive } from 'vue';
+import { useStore } from 'vuex'
+import { defineComponent, computed } from 'vue';
 import CategoryList from '@/components/CategoryList'
 
 defineComponent({
@@ -16,7 +16,9 @@ defineComponent({
   }
 })
 
-const categories = reactive(sourceData.categories);
+const store = useStore();
+
+const categories = computed(() => store.state.categories);
 </script>
 
 <style>

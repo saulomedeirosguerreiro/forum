@@ -39,9 +39,10 @@
   </template>
   
 <script setup>
-  import { defineProps, reactive } from 'vue'
-  import sourceData from '@/data.json'
-  const users = reactive(sourceData.users);
+  import { defineProps, computed } from 'vue'
+  import { useStore } from 'vuex'
+  const store = useStore(); 
+  const users = computed(() => store.state.users);
 
   defineProps({
     threads: {
@@ -51,6 +52,6 @@
   })
 
   function userById (userId) {
-    return users.find(p => p.id === userId)
+    return users.value.find(p => p.id === userId)
   }
 </script>

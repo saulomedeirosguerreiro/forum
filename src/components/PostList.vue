@@ -88,10 +88,10 @@
 </template>
 
 <script setup>
-  import sourceData from '@/data.json'
-  import { reactive,defineProps } from 'vue';
-
-  const users = reactive(sourceData.users);
+  import { useStore} from 'vuex';
+  import { computed, defineProps } from 'vue';
+  const store = useStore();
+  const users = computed(() => store.state.users);
 
   defineProps({
     posts: {
@@ -101,7 +101,7 @@
   });
   
   function userById(userId) {
-      return users.find( user => user.id === userId)
+      return users.value.find( user => user.id === userId)
   }
 </script>
 
