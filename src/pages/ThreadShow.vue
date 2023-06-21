@@ -10,14 +10,14 @@
   
   <script setup>
   import { useStore } from 'vuex'; 
-  import { reactive, computed, defineProps, defineComponent } from 'vue';
+  import { computed, defineProps, defineComponent } from 'vue';
   import PostList from '@/components/PostList.vue';
   import PostEditor from '@/components/PostEditor.vue';
   
   const store = useStore();
 
-  const posts = reactive(store.state.posts);
-  const threads = reactive(store.state.threads);
+  const posts = computed(() => store.state.posts);
+  const threads = computed(() => store.state.threads);
 
 
   defineComponent({
@@ -33,8 +33,8 @@
     }
   });
 
-  const thread = computed(() => threads.find(thread => thread.id === props.id));
-  const threadPosts = computed(() => posts.filter(post => post.threadId === props.id));
+  const thread = computed(() => threads.value?.find(thread => thread.id === props.id));
+  const threadPosts = computed(() => posts.value?.filter(post => post.threadId === props.id));
 
   function addPost(eventData) {
     const post = {
@@ -42,8 +42,7 @@
       threadId: props.id,
     }
     
-    posts.push(post);
-    thread.value.posts.push(post.id);
+    store.dispatch('createPost', post);
   }
   </script>
   
