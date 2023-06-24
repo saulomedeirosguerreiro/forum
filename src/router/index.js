@@ -3,6 +3,7 @@ import ThreadShow from '@/pages/ThreadShow'
 import NotFound from '@/pages/NotFound'
 import Forum from '@/pages/Forum'
 import Category from '@/pages/Category'
+import Profile from '@/pages/Profile'
 import { createRouter, createWebHistory } from 'vue-router'
 import store from '@/store';
 
@@ -47,6 +48,20 @@ const routes = [
     }
   },
   {
+    path: '/me',
+    name: 'Profile',
+    component: Profile,
+    meta: { toTop: true, smoothScroll: true}
+  },
+  {
+    path: '/me/edit',
+    name: 'ProfileEdit',
+    props: {
+      edit: true
+    },
+    component: Profile,
+  },
+  {
     path: '/:pathMatch(.*)*',
     name: 'NotFound',
     component: NotFound
@@ -54,5 +69,17 @@ const routes = [
 ]
 export default createRouter({
   history: createWebHistory(),
-  routes
+  routes,
+  scrollBehavior(to) {
+    const scroll = {};
+    if (to.meta.toTop) {
+      scroll.top = 0
+    }
+
+    if (to.meta.smoothScroll) {
+      scroll.behavior = 'smooth'
+    }
+
+    return scroll;
+  }
 })
