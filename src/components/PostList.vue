@@ -14,9 +14,8 @@
                 />
               </a>
   
-              <p class="desktop-only text-small">107 posts</p>
-  
-              <p class="desktop-only text-small">23 threads</p>
+              <p class="desktop-only text-small">{{userById(post.userId).postsCount}} posts</p>
+              <p class="desktop-only text-small">{{userById(post.userId).threadsCount}} threads</p>
   
               <span class="online desktop-only">online</span>
             </div>
@@ -89,10 +88,8 @@
 
 <script setup>
   import { useStore} from 'vuex';
-  import { computed, defineProps } from 'vue';
-  import { findById } from '@/helpers'
+  import { defineProps } from 'vue';
   const store = useStore();
-  const users = computed(() => store.state.users);
 
   defineProps({
     posts: {
@@ -102,7 +99,7 @@
   });
   
   function userById(userId) {
-    return findById(users.value, userId)
+    return store.getters.user(userId)
   }
 </script>
 
