@@ -9,6 +9,7 @@
   <script setup>
   import { useStore } from 'vuex';
   import { defineComponent, defineProps, computed} from 'vue';
+  import { findById } from '@/helpers'
   import ForumList from '@/components/ForumList'
 
   defineComponent({
@@ -26,7 +27,7 @@
 
   const store = useStore();
 
-  const category = computed(() => store.state.categories.find(category => category.id === props.id))
+  const category = computed(() => findById(store.state.categories, props.id))
   
   function getForumsForCategory (category) {
     return store.state.forums.filter(forum => forum.categoryId === category.id)

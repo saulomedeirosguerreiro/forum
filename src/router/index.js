@@ -3,8 +3,12 @@ import ThreadShow from '@/pages/ThreadShow'
 import NotFound from '@/pages/NotFound'
 import Forum from '@/pages/Forum'
 import Category from '@/pages/Category'
+import ThreadCreate from '@/pages/ThreadCreate'
+import ThreadEdit from '@/pages/ThreadEdit'
 import Profile from '@/pages/Profile'
 import { createRouter, createWebHistory } from 'vue-router'
+import { findById } from '@/helpers'
+
 import store from '@/store';
 
 const routes = [
@@ -31,7 +35,7 @@ const routes = [
     props: true,
     beforeEnter (to, from, next) {
       // check if thread exists
-      const threadExists = store.state.threads.find(thread => thread.id === to.params.id)
+      const threadExists = findById(store.state.threads, to.params.id)
       // if exists continue
       if (threadExists) {
         return next()
@@ -60,6 +64,18 @@ const routes = [
       edit: true
     },
     component: Profile,
+  },
+  {
+    path: '/forum/:forumId/thread/create',
+    name: 'ThreadCreate',
+    component: ThreadCreate,
+    props: true
+  },
+  {
+    path: '/thread/:id/edit',
+    name: 'ThreadEdit',
+    component: ThreadEdit,
+    props: true
   },
   {
     path: '/:pathMatch(.*)*',
