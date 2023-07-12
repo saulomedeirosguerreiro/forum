@@ -7,7 +7,7 @@
 
 <nav class="navbar">
 <ul>
-    <li class="navbar-user">
+    <li v-if="authUser" class="navbar-user">
         <a href="#">
             <img class="avatar-small" :src="authUser.avatar" :alt="`${authUser.name} profile picture`">
             <span>
